@@ -155,7 +155,7 @@ MIME_TYPE_CATEGORY_MAPPING = {
     # ==================================================================================
     # 12. APPLICAZIONI/SOFTWARE
     # ==================================================================================
-    'application/x-shockwave-flash': 'Application (Flash)',          # Adobe Flash
+    'application/x-shockwave-flash': 'Application (Flash)',          
     'application/vnd.adobe.air-application-installer-package+zip': 'Application (Adobe AIR)',  
     'application/x-msdownload': 'Application (Windows)',             
     'application/x-executable': 'Application (Eseguibile)',          
@@ -943,7 +943,6 @@ class EnhancedRelationshipGenerator:
 
     def generate_date_uri(self, normalized_date: str) -> str:
         """Genera URI per entità Date COERENTE con evangelisti_metadata_extraction.py"""
-        # ✅ SOSTITUISCI TUTTO IL CONTENUTO:
         # Formato: http://ficlit.unibo.it/ArchivioEvangelisti/date_YYYYMMDD
         date_formatted = normalized_date.replace('-', '')  # 2025-01-01 → 20250101
         return f"{BASE_URIS['date']}{date_formatted}"
@@ -3054,7 +3053,7 @@ class EnhancedRelationshipGenerator:
             if not group_b_active:
                 self.logger.info("\n⚡ SALTANDO GRUPPO B - Solo query richieste")
             else:
-                self.logger.info("\n" + "🧠 GRUPPO B: ARRICCHIMENTO CON CONOSCENZA ESTERNA")
+                self.logger.info("\n" + "GRUPPO B: ARRICCHIMENTO CON CONOSCENZA ESTERNA")
                 self.logger.info("="*70)
                 
                 # === FASE 1B: ALLINEAMENTO TECHNICAL METADATA TYPES ===
@@ -3198,7 +3197,7 @@ class EnhancedRelationshipGenerator:
 
             # Riepilogo Gruppo B  
             if group_b_active:
-                self.logger.info(f"\n🧠 GRUPPO B - ARRICCHIMENTO CON CONOSCENZA ESTERNA:")
+                self.logger.info(f"\n GRUPPO B - ARRICCHIMENTO CON CONOSCENZA ESTERNA:")
                 
                 if hasattr(result, 'total_sameas_relationships_created') and result.total_sameas_relationships_created > 0:
                     self.logger.info(f"   🔗 Relazioni owl:sameAs: {result.total_sameas_relationships_created} collegamenti semantici")
