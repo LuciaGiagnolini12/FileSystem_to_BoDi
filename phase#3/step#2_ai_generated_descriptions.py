@@ -1,46 +1,41 @@
 #!/usr/bin/env python3
 """
 AI Technical Descriptions Generator - Generatore Descrizioni AI per Metadati Tecnici
-CON SUPPORTO OLLAMA E GRAFO SPECIFICO
-ENHANCED VERSION - Con Activity, Software e Human Validation
-🆕 FILTRATO PER RECORD NON ANONIMIZZATI
 
+🔍 Query Blazegraph with pagination + filter for non-anonymized Records
 
+🛡️ Automatic exclusion of Instantiations of Records that are redactedInformation
 
-Funzionalità ENHANCED:
-- Rico:Activity per ogni generazione di testo
-- bodi:Software con documentazione Ollama  
-- bodi:hasHumanValidation (default: false)
-- URI strutturati seguendo pattern metadata extraction
-- Cache persistente per Software entities
-- Relazioni bidirezionali complete
-- 🆕 FILTRO: Solo Record visibili (non anonimizzati)
+🤖 Send metadata to Ollama for description generation (only visible Records)
 
-WORKFLOW ENHANCED + FILTRATO:
-- 🔍 Query Blazegraph con paginazione + FILTRO Record non anonimizzati
-- 🛡️ Esclusione automatica Instantiation di Record che HANNO redactedInformation
-- 🤖 Invio metadati a Ollama per generazione descrizione (solo Record visibili)
-- 📝 Creazione entità TechnicalDescription con descrizione generata
-- 🎭 Creazione Activity "Text generation" per ogni descrizione
-- 💻 Creazione/riutilizzo Software entity per modello Ollama
-- 🔗 Collegamenti bidirezionali completi tra tutte le entità
-- ✅ Aggiunta hasHumanValidation = false
-- 💾 Inserimento in Blazegraph e/o export N-Quads
+📝 Create TechnicalDescription entity with generated description
 
-RELAZIONI CREATE (ENHANCED + FILTRATO):
-- Instantiation →(bodi:hasTechnicalDescription)→ TechnicalDescription
-- TechnicalDescription →(bodi:isTechnicalDescriptionOf)→ Instantiation
-- TechnicalDescription →(bodi:generatedBy)→ Activity
-- Activity →(bodi:hasGenerated)→ TechnicalDescription
-- Activity →(rico:isOrWasPerformedBy)→ Software
-- Software →(rico:performsOrPerformed)→ Activity
-- TechnicalDescription →(bodi:hasHumanValidation)→ "false"
+🎭 Create "Text generation" Activity for each description
 
-🔒 FILTRO PRIVACY: Solo Instantiation di Record senza proprietà redactedInformation
+💻 Create/reuse Software entity for Ollama model
 
-Autore: Sistema Gestione Metadati Evangelisti
-Data: 2025
-Versione: 2.1 Enhanced + Filtered
+🔗 Complete bidirectional linking between all entities
+
+✅ Add hasHumanValidation = false
+
+💾 Insert into Blazegraph and/or export as N-Quads
+
+RELATIONSHIPS CREATED:
+
+Instantiation →(bodi:hasTechnicalDescription)→ TechnicalDescription
+
+TechnicalDescription →(bodi:isTechnicalDescriptionOf)→ Instantiation
+
+TechnicalDescription →(bodi:generatedBy)→ Activity
+
+Activity →(bodi:hasGenerated)→ TechnicalDescription
+
+Activity →(rico:isOrWasPerformedBy)→ Software
+
+Software →(rico:performsOrPerformed)→ Activity
+
+TechnicalDescription →(bodi:hasHumanValidation)→ "false"
+
 """
 
 import argparse
@@ -1591,48 +1586,6 @@ Esempi di utilizzo ENHANCED + FILTRATO:
   # Ottimizzazioni per database grandi
   python ai_technical_descriptions_filtered.py --page-size 50 --batch-size 5
 
-🔒 FILTRO PRIVACY ATTIVO:
-- ❌ ESCLUSE: Instantiation collegate a Record che HANNO la proprietà bodi:redactedInformation (qualsiasi valore)
-- ✅ INCLUSE: Solo Instantiation di Record SENZA la proprietà redactedInformation
-- 🛡️ Automatico: Include solo Record che non sono mai stati processati dal privacy system
-
-ENHANCED FEATURES v2.1 + FILTRATO:
-- ✅ Rico:Activity per ogni generazione di testo
-- 💻 bodi:Software con documentazione Ollama automatica
-- 🔍 bodi:hasHumanValidation (default: false) per tutte le descrizioni
-- 🔗 Relazioni bidirezionali complete tra tutte le entità
-- 📁 Cache persistente per Software entities in JSON
-- 🎯 URI strutturati con contatori (pattern metadata extraction)
-- 🔢 AI Generated Text: URI con contatore globale
-- 🔒 FILTRO: Solo Record senza redactedInformation = "yes"
-
-WORKFLOW ENHANCED + FILTRATO:
-- 🔍 Query Blazegraph paginata CON FILTRO Record senza redactedInformation
-- 🛡️ Esclusione automatica Instantiation di Record che hanno redactedInformation
-- 🤖 Generazione descrizioni tramite Ollama (solo Record visibili)
-- 📝 Creazione TechnicalDescription con hasHumanValidation=false
-- 🎭 Creazione Activity "Text generation" per ogni descrizione
-- 💻 Creazione/riutilizzo Software entity per modello Ollama
-- 🔗 Collegamenti bidirezionali completi
-- 💾 Inserimento in Blazegraph e/o export N-Quads
-
-RELAZIONI CREATE ENHANCED + FILTRATO:
-- Instantiation →(bodi:hasTechnicalDescription)→ TechnicalDescription
-- TechnicalDescription →(bodi:isTechnicalDescriptionOf)→ Instantiation  
-- TechnicalDescription →(bodi:generatedBy)→ Activity
-- Activity →(bodi:hasGenerated)→ TechnicalDescription
-- Activity →(rico:isOrWasPerformedBy)→ Software
-- Software →(rico:performsOrPerformed)→ Activity
-- TechnicalDescription →(bodi:hasHumanValidation)→ "false"
-- Software →(bodi:hasDocumentation)→ [Ollama URL]
-
-SCALABILITÀ ENHANCED + FILTRATO:
-- Filtro efficiente con NOT EXISTS in query SPARQL
-- Cache persistente Software entities evita duplicati
-- URI strutturati garantiscono consistenza
-- Contatori salvati in {AI_COUNTERS_JSON_FILE}
-- Paginazione automatica per dataset di qualsiasi dimensione
-- Rispetto automatico privacy protection system
 """
     )
     
