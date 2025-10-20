@@ -8,7 +8,7 @@ Developed as part of Lucia Giagnolini's PhD research, this workflow translates t
 
 The system takes a directory (or a set of directories) as input and produces its RDF representation compliant with the **BoDi (Born-Digital Archive Ontology)** model. The resulting graph allows a semantic representation of the archive's hierarchy, provenance, and relationships among digital objects.
 
-For each stage of the workflow, a dedicated folder containing the corresponding Python scripts is included in this repository.
+For each phase of the workflow, a dedicated folder containing the corresponding Python scripts is included in this repository.
 
 ## Methodological Objectives
 
@@ -22,11 +22,11 @@ The workflow has been designed to pursue specific methodological goals:
 
 ## Workflow Structure
 
-The workflow is organized into five main stages, each with its own folder containing the Python code:
+The workflow is organized into five main phases, each with its own folder containing the Python code:
 
-### Stage 1: Systematization of Existing Information
+### Phase 1: Systematization of Existing Information
 
-This foundational stage produces a formalized representation of the archive's content structure through ten progressive steps:
+This foundational phase produces a formalized representation of the archive's content structure through ten progressive steps:
 
 - Implementation of protection measures to ensure archive immutability
 - Complete hierarchical census of files and directories
@@ -40,9 +40,9 @@ This foundational stage produces a formalized representation of the archive's co
 
 **Output**: RDF files of the archive structure with comprehensive technical metadata.
 
-### Stage 2: Rule-Based Validation and Enrichment
+### Phase 2: Rule-Based Validation and Enrichment
 
-This stage operates exclusively in the semantic domain to validate logical coherence and make implicit knowledge explicit through controlled inference:
+This phase operates exclusively in the semantic domain to validate logical coherence and make implicit knowledge explicit through controlled inference:
 
 - **Validation**: SPARQL queries verify structural consistency, metadata presence, and relationship coherence
 - **Semantic enrichment** through six operations:
@@ -54,18 +54,18 @@ This stage operates exclusively in the semantic domain to validate logical coher
 
 **Output**: A validated and enriched knowledge base with explicit relationships and normalized metadata.
 
-### Stage 3: Semantic Enrichment Through Domain Knowledge and Generative Models
+### Phase 3: Semantic Enrichment Through Domain Knowledge and Generative Models
 
-This stage extends the information perimeter through integration of specialized knowledge sources and AI technologies:
+This phase extends the information perimeter through integration of specialized knowledge sources and AI technologies:
 
 - **Semi-automatic mapping**: Connection of archival documents to reference works using the LRMoo model (IFLA Library Reference Model)
 - **Automated system**: AI (Llama) for producing natural language descriptions derived from metadata analysis
 
 **Output**: Contextually enriched descriptions of files and folders.
 
-### Stage 4: Provenance Documentation
+### Phase 4: Provenance Documentation
 
-This stage reconstructs the contexts of origin and documents the chain of custody:
+This phase reconstructs the contexts of origin and documents the chain of custody:
 
 - Census of different digital environments
 - Reconstruction of their characteristics and temporal/processual relationships
@@ -74,9 +74,9 @@ This stage reconstructs the contexts of origin and documents the chain of custod
 
 **Output**: A knowledge graph enriched with information about provenance contexts and custodial history.
 
-### Stage 5: Anonymization for Publication
+### Phase 5: Anonymization for Publication
 
-The final stage implements selective anonymization strategies that preserve structure and informational value while protecting sensitive information:
+The final phase implements selective anonymization strategies that preserve structure and informational value while protecting sensitive information:
 
 - Distinction between different types of archival resources
 - Application of differentiated anonymization logic
