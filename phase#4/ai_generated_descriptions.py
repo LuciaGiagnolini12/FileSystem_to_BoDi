@@ -1,31 +1,7 @@
 #!/usr/bin/env python3
 """
 AI Technical Descriptions Generator - Generatore Descrizioni AI per Metadati Tecnici
-CON SUPPORTO OLLAMA E GRAFO SPECIFICO
-ENHANCED VERSION - Con Activity, Software e Human Validation
-🆕 FILTRATO PER RECORD NON ANONIMIZZATI
 
-
-
-Funzionalità ENHANCED:
-- Rico:Activity per ogni generazione di testo
-- bodi:Software con documentazione Ollama  
-- bodi:hasHumanValidation (default: false)
-- URI strutturati seguendo pattern metadata extraction
-- Cache persistente per Software entities
-- Relazioni bidirezionali complete
-- 🆕 FILTRO: Solo Record visibili (non anonimizzati)
-
-WORKFLOW ENHANCED + FILTRATO:
-- 🔍 Query Blazegraph con paginazione + FILTRO Record non anonimizzati
-- 🛡️ Esclusione automatica Instantiation di Record che HANNO redactedInformation
-- 🤖 Invio metadati a Ollama per generazione descrizione (solo Record visibili)
-- 📝 Creazione entità TechnicalDescription con descrizione generata
-- 🎭 Creazione Activity "Text generation" per ogni descrizione
-- 💻 Creazione/riutilizzo Software entity per modello Ollama
-- 🔗 Collegamenti bidirezionali completi tra tutte le entità
-- ✅ Aggiunta hasHumanValidation = false
-- 💾 Inserimento in Blazegraph e/o export N-Quads
 
 RELAZIONI CREATE (ENHANCED + FILTRATO):
 - Instantiation →(bodi:hasTechnicalDescription)→ TechnicalDescription
@@ -36,11 +12,6 @@ RELAZIONI CREATE (ENHANCED + FILTRATO):
 - Software →(rico:performsOrPerformed)→ Activity
 - TechnicalDescription →(bodi:hasHumanValidation)→ "false"
 
-🔒 FILTRO PRIVACY: Solo Instantiation di Record senza proprietà redactedInformation
-
-Autore: Sistema Gestione Metadati Evangelisti
-Data: 2025
-Versione: 2.1 Enhanced + Filtered
 """
 
 import argparse
