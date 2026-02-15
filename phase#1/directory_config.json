@@ -1,0 +1,104 @@
+{
+  "directories": {
+    "floppy": {
+      "path": "/media/sdb1/evangelisti/data/FloppyDisks/",
+      "description": "Floppy Disks e CD",
+      "structure": {
+        "root_id": "RS1_RS3",
+        "output_suffix": "floppy",
+        "log_suffix": "floppy"
+      },
+      "files": {
+        "count_output": "FloppyDisks_CNT.json",
+        "hash_output": "FloppyDisks_HASH.json",
+        "structure_output": "structure_floppy.nq"
+      },
+      "metadata": {
+        "directory": "floppy",
+        "check_type": "floppy"
+      },
+      "base_path_normalized": "/media/sdb1/evangelisti/data/FloppyDisks/"
+    },
+    "hd": {
+      "path": "/media/sdb1/evangelisti/data/HardDiskValerio/",
+      "description": "Hard Disk",
+      "structure": {
+        "root_id": "RS1_RS1",
+        "output_suffix": "hd",
+        "log_suffix": "hd"
+      },
+      "files": {
+        "count_output": "HD_CNT.json",
+        "hash_output": "HD_HASH.json",
+        "structure_output": "structure_hd.nq"
+      },
+      "metadata": {
+        "directory": "hd",
+        "check_type": "hd"
+      },
+      "base_path_normalized": "/media/sdb1/evangelisti/data/HardDiskValerio/"
+    },
+    "hdesterno": {
+      "path": "/media/sdb1/evangelisti/data/HDEsternoEvangelisti/",
+      "description": "HD Esterno Evangelisti",
+      "structure": {
+        "root_id": "RS1_RS2",
+        "output_suffix": "hdesterno",
+        "log_suffix": "hdesterno"
+      },
+      "files": {
+        "count_output": "HDEsterno_CNT.json",
+        "hash_output": "HDEsterno_HASH.json",
+        "structure_output": "structure_hdesterno.nq"
+      },
+      "metadata": {
+        "directory": "hdesterno",
+        "check_type": "hdesterno"
+      },
+      "base_path_normalized": "/media/sdb1/evangelisti/data/HDEsternoEvangelisti/"
+    }
+  },
+  "blazegraph": {
+    "base_url": "http://localhost:9999/blazegraph",
+    "namespace": "kb",
+    "endpoints": [
+      "http://localhost:9999/blazegraph/namespace/kb/sparql",
+      "http://127.0.0.1:9999/blazegraph/namespace/kb/sparql"
+    ]
+  },
+  "pipeline": {
+    "reset_config": {
+      "reset_on_start": true,
+      "prompt_before_reset": false,
+      "backup_before_reset": true,
+      "reset_method": "namespace_clear"
+    },
+    "batch_sizes": {
+      "chunk_size": 100,
+      "persistence_interval": 100
+    }
+  },
+  "metadata": {
+    "created": "2025-01-11",
+    "version": "1.1",
+    "description": "Configurazione unificata per l'Archivio Evangelisti - Case Sensitivity Fixed",
+    "last_updated": "2025-01-18T12:00:00Z",
+    "changelog": [
+      {
+        "version": "1.1", 
+        "date": "2025-01-18",
+        "changes": [
+          "FIXED: Normalizzati tutti output_suffix in lowercase (hdesterno)",
+          "FIXED: Aggiornato structure_output per usare suffix lowercase"
+        ]
+      },
+      {
+        "version": "1.0",
+        "date": "2025-01-11", 
+        "changes": [
+          "Configurazione iniziale"
+        ]
+      }
+    ]
+  }
+}
