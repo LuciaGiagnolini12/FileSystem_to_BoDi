@@ -1,7 +1,7 @@
 {
   "directories": {
     "floppy": {
-      "path": "/media/sdb1/evangelisti/data/FloppyDisks/",
+      "path": "", #provide desided file system path here
       "description": "Floppy Disks e CD",
       "structure": {
         "root_id": "RS1_RS3",
@@ -17,10 +17,10 @@
         "directory": "floppy",
         "check_type": "floppy"
       },
-      "base_path_normalized": "/media/sdb1/evangelisti/data/FloppyDisks/"
+      "base_path_normalized": "" #provide desided file system path here
     },
     "hd": {
-      "path": "/media/sdb1/evangelisti/data/HardDiskValerio/",
+      "path": "", #provide desided file system path here
       "description": "Hard Disk",
       "structure": {
         "root_id": "RS1_RS1",
@@ -36,10 +36,10 @@
         "directory": "hd",
         "check_type": "hd"
       },
-      "base_path_normalized": "/media/sdb1/evangelisti/data/HardDiskValerio/"
+      "base_path_normalized": "" #provide desided file system path here
     },
     "hdesterno": {
-      "path": "/media/sdb1/evangelisti/data/HDEsternoEvangelisti/",
+      "path": "", #provide desided file system path here
       "description": "HD Esterno Evangelisti",
       "structure": {
         "root_id": "RS1_RS2",
@@ -55,7 +55,7 @@
         "directory": "hdesterno",
         "check_type": "hdesterno"
       },
-      "base_path_normalized": "/media/sdb1/evangelisti/data/HDEsternoEvangelisti/"
+      "base_path_normalized": "" #provide desided file system path here
     }
   },
   "blazegraph": {
@@ -81,7 +81,7 @@
   "metadata": {
     "created": "2025-01-11",
     "version": "1.1",
-    "description": "Configurazione unificata per l'Archivio Evangelisti - Case Sensitivity Fixed",
+    "description": "Configurazione unificata per l'Archivio Evangelisti",
     "last_updated": "2025-01-18T12:00:00Z",
     "changelog": [
       {
