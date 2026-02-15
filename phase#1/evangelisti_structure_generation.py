@@ -40,19 +40,19 @@ def get_directory_configs():
     # Configurazione locale fallback aggiornata
     return {
         "floppy": {
-            "path": "/media/sdb1/evangelisti/data/FloppyDisks/",
+            "path": "", #provide desided file system path here
             "root_id": "RS1_RS3",
             "output_suffix": "floppy",
             "log_suffix": "floppy"
         },
         "hd": {
-            "path": "/media/sdb1/evangelisti/data/HardDiskValerio/",
+            "path": "", #provide desided file system path here
             "root_id": "RS1_RS1", 
             "output_suffix": "hd",
             "log_suffix": "hd"
         },
         "hdesterno": {
-            "path": "/media/sdb1/evangelisti/data/HDEsternoEvangelisti/",
+            "path": "", #provide desided file system path here
             "root_id": "RS1_RS2",
             "output_suffix": "hdesterno", 
             "log_suffix": "hdesterno"
@@ -124,7 +124,7 @@ class Config:
         )
 
 
-# === FUNZIONI HELPER PER DETERMINAZIONE TIPO DA ID ===
+# === FUNZIONI HELPER PER DETERMINAZIONE TIPOLOGIA A PARTIRE DALL'ID ===
 
 def determine_rico_type_from_id(entry_id: str) -> str:
     """
@@ -159,7 +159,7 @@ def get_rico_type_uri(rico_type: str, namespace_manager) -> 'URIRef':
     else:
         raise ValueError(f"Tipo RiC non riconosciuto: {rico_type}")
 
-# === SISTEMA DI LOGGING AVANZATO ===
+# === SISTEMA DI LOGGING ===
 class AdvancedLogger:
     """Sistema di logging avanzato con tracking dettagliato"""
     
@@ -479,8 +479,6 @@ class EntityBuilder:
                                 f"tipo esistente {[str(t) for t in existing_rico_types]}, "
                                 f"tipo da ID {rico_type_uri}")
                 
-                # 🚨 QUESTO NON DOVREBBE MAI ACCADERE con la logica corretta
-                # Se accade, c'è un bug più profondo
                 raise ValueError(f"Conflitto critico di tipi per {entry_id}")
             
             # Gestisci label duplicata con priorità per label personalizzate
@@ -493,15 +491,14 @@ class EntityBuilder:
             self.logger.debug(f"[EXISTING-ENTITY] {entry_id}: tipo corretto già presente")
             return base_uri
         
-        # 🆕 ENTITÀ NUOVA - usa tipo determinato dall'ID e label personalizzata
+        # ENTITÀ NUOVA - usa tipo determinato dall'ID e label personalizzata
         self.add_triple(base_uri, RDF.type, rico_type_uri)
         
-        # 🆕 USA LABEL PERSONALIZZATA PER LE ROOT SPECIALI
-        # 🆕 USA LABEL PERSONALIZZATA PER LE ROOT SPECIALI
+        # USA LABEL PERSONALIZZATA PER LE ROOT SPECIALI
         custom_label = self.get_custom_record_label(entry_id, entry_name)
         self.add_triple(base_uri, RDFS.label, Literal(custom_label))
         
-        # 🆕 AGGIUNGI RecordSetType SE È UN RECORDSET
+        # AGGIUNGI RecordSetType SE È UN RECORDSET
         if rico_type == 'recordset':
             recordset_type_uri, recordset_type_label = self.get_recordset_type(entry_id)
             
@@ -587,7 +584,7 @@ class EntityBuilder:
         # CRUCIALE: Dichiarazione esplicita del tipo
         self.add_triple(inst_uri, RDF.type, self.ns.rico.Instantiation)
         
-        # 🆕 LABELS PERSONALIZZATE PER LE ROOT SPECIALI
+        # LABELS PERSONALIZZATE PER LE ROOT SPECIALI
         custom_label = self.get_custom_instantiation_label(entry_id, entry_name)
         self.add_triple(inst_uri, RDFS.label, Literal(custom_label))
         
@@ -758,7 +755,7 @@ class FileSystemProcessor:
             # Crea l'entità record principale
             record_uri = self.builder.create_record_entity(entry_id, entry_name, entry_type)
             
-            # 🆕 MODIFICA: Crea istanziazione per TUTTE le root speciali, non solo quelle diverse da "RS1"
+            # MODIFICA: Crea istanziazione per TUTTE le root speciali, non solo quelle diverse da "RS1"
             inst_uri = None
             if entry_id != "RS1" or entry_id in ["RS1_RS1", "RS1_RS2", "RS1_RS3"]:  
                 # Calcola hash per i file
@@ -931,7 +928,7 @@ class OutputValidator:
                     if 'prov#atLocation' in line:
                         stats['location_links'] += 1
                     
-                    # 🆕 CONTA ELEMENTI STORAGE
+                    #  CONTA ELEMENTI STORAGE
                     if 'premis/rdf/v3/StorageLocation' in line:
                         stats['storage_locations'] += 1
                     
