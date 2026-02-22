@@ -1,4 +1,4 @@
-# Born-Digital Archive Pipeline
+# Born-Digital Archive Pipeline - Phase 1
 
 Automated pipeline for indexing, verifying, and loading born-digital personal archives into a knowledge graph modeled with Records in Contexts-Ontology (RiC-O) and the Born-Digital Ontology (BoDi).
 
