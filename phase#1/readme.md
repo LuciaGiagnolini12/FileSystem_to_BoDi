@@ -136,6 +136,7 @@ python pipeline.py --log my_archive.log
 
 ---
 
+
 ## Pipeline steps
 
 | Step | What it does | Script | Output |
@@ -144,17 +145,17 @@ python pipeline.py --log my_archive.log
 | 2 | Calculates SHA-256 hashes | `hash_calc.py` | `*_HASH.json` |
 | 3 | Generates the RDF structure | `structure_generation.py` | `structure_*.nq` |
 | 4 | Loads the structure into Blazegraph | `blazegraph_loader.py` | — |
-| 5| Post-structure backup | *(internal)* | `backups/*.nq` |
-| 6 | Verifies counts via SPARQL | `count_check.py` | — |
+| 5 | Post-structure backup | `pipeline.py` | `backups/*.nq` |
+| 6| Verifies counts via SPARQL | `count_check.py` | — |
 | 7 | Verifies hash integrity via SPARQL | `integrity_check.py` | — |
 | 8 | Extracts technical metadata (Tika, ExifTool) | `metadata_extraction.py` | `*_TechMeta_*.nq` |
 | 9 | Recalculates hashes to verify files were not modified | `hash_calc.py` | — |
 | 10 | Loads metadata into Blazegraph | `blazegraph_loader.py` | — |
-| 11 | Post-metadata backup | *(internal)* | `backups/*.nq` |
-| 12 | Generates the Named Graph Registry (index of loaded graphs) | *(internal)* | `NGRegistry.nq` |
-| 13 | Final backup | *(internal)* | `backups/*.nq` |
+| 11 | Post-metadata backup | `pipeline.py` | `backups/*.nq` |
+| 12 | Generates the Named Graph Registry (index of loaded graphs) | `pipeline.py` | `NGRegistry.nq` |
+| 13 | Final backup | `pipeline.py` | `backups/*.nq` |
 
-`pipeline.py` orchestrates all steps by invoking the other scripts as subprocesses, except `blazegraph_loader.py` which is imported directly.
+`pipeline.py` orchestrates all steps: it invokes `file_count.py`, `hash_calc.py`, `structure_generation.py`, `count_check.py`, `integrity_check.py` and `metadata_extraction.py` as subprocesses, imports `blazegraph_loader.py` directly, and handles backups and Named Graph Registry generation within its own code.
 
 ---
 
