@@ -6,7 +6,7 @@ Phase 3 adds a bibliographic layer to the graph built in Phases 1 and 2: intelle
 
 ## How it works
 
-`step_1_works_evangelisti.py` reads a spreadsheet listing which archive records correspond to which intellectual works, then generates `lrmoo:F1_Work` entities and links them to the Records and RecordSets already in the graph. Work-to-work hierarchical relationships (e.g. a cycle containing individual novels) are also modelled. When a work is linked to a RecordSet, the link is automatically propagated down to all its child Records.
+`works_evangelisti.py` reads a spreadsheet listing which archive records correspond to which intellectual works, then generates `lrmoo:F1_Work` entities and links them to the Records and RecordSets already in the graph. Work-to-work hierarchical relationships (e.g. a cycle containing individual novels) are also modelled. When a work is linked to a RecordSet, the link is automatically propagated down to all its child Records.
 
 Output is written both to a **N-Quads file** and to a **dedicated named graph** in Blazegraph.
 
@@ -22,7 +22,7 @@ pip install requests rdflib pandas openpyxl
 
 ## Adapting the script to a different archive
 
-Three things to update in `step_1_works_evangelisti.py`:
+Three things to update in `works_evangelisti.py`:
 
 **1. Base URIs:**
 ```python
@@ -50,7 +50,7 @@ XLSX_FILE_PATH = "your_works_file.xlsx"
 ## Running the script
 
 ```bash
-python step_1_works_evangelisti.py
+python works_evangelisti.py
 ```
 
 There are no CLI arguments: all configuration is done by editing the constants at the top of the file.
