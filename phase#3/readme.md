@@ -1,4 +1,4 @@
-# Personal Archive Pipeline — Phase 3
+# Born-Digital Archive Pipeline — Phase 3
 
 Phase 3 adds a bibliographic layer to the graph built in Phases 1 and 2: intellectual works are modelled as `lrmoo:F1_Work` entities and linked to the Records and RecordSets that document them.
 
