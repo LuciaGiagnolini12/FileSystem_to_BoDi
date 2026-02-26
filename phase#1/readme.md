@@ -1,6 +1,6 @@
 # Born-Digital Archive Pipeline - Phase 1
 
-Automated pipeline for indexing, verifying, and loading born-digital personal archives into a knowledge graph modeled with Records in Contexts-Ontology (RiC-O) and the Born-Digital Ontology (BoDi).
+Automated pipeline for indexing, verifying, and loading born-digital personal archives into a knowledge graph modeled with [Records in Contexts-Ontology (RiC-O)(https://www.ica.org/standards/RiC/ontology)] and the [Born-Digital Ontology (BoDi)(http://w3id.org/bodi#)].
 
 Developed and tested on the Valerio Evangelisti Archive, it is designed to be reused with any personal digital directory: it is sufficient to configure the paths in the configuration file.
 
@@ -22,17 +22,19 @@ The graph is built incrementally across several stages:
 
 ## Requirements
 
-**External software:**
+### System
 - Java ≥ 8
-- [Blazegraph](https://blazegraph.com/) (`blazegraph.jar`)
-- [Apache Tika](https://tika.apache.org/) (`tika-app.jar`)
-- [ExifTool](https://exiftool.org/) (available in `PATH`)
-- `sha256sum` (Linux) or `shasum` (macOS, preinstalled)
+- ExifTool — [download](https://exiftool.org/) or:
+  - macOS: `brew install exiftool`
+  - Linux: `sudo apt install libimage-exiftool-perl`
+- `sha256sum` (Linux, preinstalled) / `shasum` (macOS, preinstalled)
 
-**Python ≥ 3.8:**
-```bash
-pip install requests rdflib SPARQLWrapper psutil
-```
+### Java tools (download JARs manually)
+- [Blazegraph](https://github.com/blazegraph/database/releases) (`blazegraph.jar`)
+- [Apache Tika](https://tika.apache.org/download.html) (`tika-app.jar`)
+
+### Python ≥ 3.8
+pip install requests>=2.28 rdflib>=6.0 SPARQLWrapper>=2.0 psutil>=5.9
 
 ---
 
@@ -64,10 +66,11 @@ All configuration is centralised in `directory_config.json`, to be created in th
 }
 ```
 
-You can define as many directories as needed, each corresponding to a physical medium or a logical partition of the archive (e.g. floppy disks, hard drives, tapes, etc.).
+The keys under `directories` (e.g. `medium1`, `medium2`) identify each medium and become the names usable with `--directories` on the command line. They should be adapted to reflect your archive's physical media or logical partitions — the defaults in the code correspond to the Evangelisti Archive (`floppy`, `hd`, `hdesterno`).
+
+> **Note:** `output_suffix`, `log_suffix`, and `metadata.directory` must be **lowercase** and must all match each other within the same directory entry.
 
 If `directory_config.json` is not present, each script falls back to its own hardcoded local configuration (the Evangelisti Archive settings, used as a reference).
-
 
 ### URIs
 
@@ -78,25 +81,22 @@ All RDF resources in the graph are minted using a base URI that must be updated 
 BASE_URL: str = "http://your-institution.org/YourArchive/"
 ```
 
-**`pipeline_test.py`** — inside the `NGRegistryGenerator` class:
-```python
-self.base_uri = "http://your-institution.org/YourArchive"
-
-Two values are hardcoded in the `NGRegistryGenerator` class inside `pipeline.py` and must be updated for a different archive:
+**`pipeline.py`** — inside the `NGRegistryGenerator` class:
 
 ```python
 # Root URI of the archive
 self.base_uri = "http://your-institution.org/YourArchive"
 
-# Also update the mapping from directory keys to archival structure identifiers
+# Mapping from directory keys to archival structure identifiers
 self.directory_structure_mapping = {
     'medium1': 'RS1_RS1',
     'medium2': 'RS1_RS2',
 }
 ```
-**`metadata_extraction.py`** — the base URI appears in multiple places throughout the file, both in a `BASE_URIS` dictionary and in individual `URIRef` calls. 
 
-### required code change
+**`metadata_extraction.py`** — the base URI appears in multiple places throughout the file, both in a `BASE_URIS` dictionary and in individual `URIRef` calls.
+
+### Required code change
 
 In `pipeline.py`, update `PYTHON_INTERPRETER` with your Python environment path:
 
@@ -109,16 +109,7 @@ PYTHON_INTERPRETER = '/opt/conda/bin/python3'  # Anaconda
 
 ## Running the pipeline
 
-### 1. Start Blazegraph
-
-```bash
-cd blazegraph_journal/
-java -jar blazegraph.jar
-```
-
-The server listens by default on `http://localhost:9999/blazegraph`.
-
-### 2. Run the pipeline
+Blazegraph and Apache Tika are started automatically — no manual setup is required before launching the pipeline.
 
 ```bash
 # All configured directories
@@ -135,6 +126,7 @@ python pipeline.py --log my_archive.log
 ```
 
 ---
+
 
 
 ## Pipeline steps
