@@ -16,7 +16,7 @@ The workflow has been designed to pursue specific methodological goals:
 
 - **Integrity preservation**: Every operation maintains the physical and logical integrity of original documents through cryptographic verification mechanisms and preventive backup systems that ensure complete traceability of transformations.
 
-- **Reversibility and transparency**: All transformations are documented and reversible, maintaining a chain-of-custody that unequivocally links physical documents to their semantic representations through verifiable and reproducible processes.
+- **Reversibility and transparency**: All transformations are documented and reversible, maintaining a chain-of-custody that links physical documents to their semantic representations through verifiable and reproducible processes.
 
 - **Standards compliance**: Generated representations adhere to documented representation models to ensure portability, interoperability, and reusability.
 
