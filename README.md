@@ -108,7 +108,7 @@ The workflow has been experimentally applied to the **Valerio Evangelisti Archiv
 - Copy of the external hard disk
 - Copy of the extracted contents from floppy disks
 
-The output will be soon published in a [dedicated ResearchSpace App] (https://github.com/LuciaGiagnolini12/ValerioEvangelisti_Project).
+The output will be soon published in a [dedicated ResearchSpace App](https://github.com/LuciaGiagnolini12/ValerioEvangelisti_Project).
 
 ## License
 
