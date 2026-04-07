@@ -1,6 +1,6 @@
 # FileSystem_to_BoDi
 
-Python workflow for generating RDF knowledge graphs from born-digital archives according to the [Born-Digital Archive Ontology (BoDi)](http://w3id.org/bodi#), an extension of [Records in Contexts - Ontology (RiC-O)(https://www.ica.org/standards/RiC/ontology)]. 
+Python workflow for generating RDF knowledge graphs from born-digital archives according to the [Born-Digital Ontology (BoDi)](http://w3id.org/bodi#), an extension of [Records in Contexts - Ontology (RiC-O)](https://www.ica.org/standards/RiC/ontology). 
 
 ## Overview
 
@@ -58,8 +58,8 @@ This phase operates exclusively in the semantic domain to validate logical coher
 
 This phase extends the information perimeter through integration of specialized knowledge sources and AI technologies:
 
-- **Semi-automatic mapping**: Connection of archival documents to reference works using the [LRMoo model (IFLA Library Reference Model) (https://cidoc-crm.org/lrmoo)].
-- **Automated system**: AI ([Llama (https://www.llama.com/)]) for producing natural language descriptions derived from metadata analysis
+- **Semi-automatic mapping**: Connection of archival documents to reference works using the [LRMoo model (IFLA Library Reference Model)](https://cidoc-crm.org/lrmoo).
+- **Automated system**: AI ([Llama] (https://www.llama.com/)) for producing natural language descriptions derived from metadata analysis
 
 **Output**: Contextually enriched descriptions of files and folders.
 
@@ -108,7 +108,7 @@ The workflow has been experimentally applied to the **Valerio Evangelisti Archiv
 - Copy of the external hard disk
 - Copy of the extracted contents from floppy disks
 
-The output will be soon published in a [dedicated ResearchSpace App (https://github.com/LuciaGiagnolini12/ValerioEvangelisti_Project)].
+The output will be soon published in a [dedicated ResearchSpace App] (https://github.com/LuciaGiagnolini12/ValerioEvangelisti_Project).
 
 ## License
 
