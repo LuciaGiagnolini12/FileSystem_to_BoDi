@@ -1,4 +1,5 @@
 # Born-Digital Archive Pipeline - Phase 1
+# Archive Ingestion and RDF Baseline Construction
 
 Automated pipeline for indexing, verifying, and loading born-digital personal archives into a knowledge graph modeled with [Records in Contexts-Ontology (RiC-O)(https://www.ica.org/standards/RiC/ontology)] and the [Born-Digital Ontology (BoDi)(http://w3id.org/bodi#)].
 
