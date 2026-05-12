@@ -24,7 +24,7 @@ The workflow has been designed to pursue specific methodological goals:
 
 The workflow is organized into five main phases, each with its own folder containing the Python code:
 
-### Phase 1: Systematization of Existing Information
+### Phase 1: Archive Ingestion and RDF Baseline Construction
 
 This foundational phase produces a formalized representation of the archive's content structure through ten progressive steps:
 
