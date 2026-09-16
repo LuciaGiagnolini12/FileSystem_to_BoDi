@@ -28,7 +28,7 @@ A Blazegraph journal backup is created automatically before any writes unless `-
 | Entity URI is in `blacklist.xlsx` | **Redacted** |
 | Entity is a hierarchical child of a blacklisted entity (via `rico:isOrWasIncludedIn`) | **Redacted** |
 | Entity is both blacklisted and work-linked / whitelisted | **Kept** (takes precedence) |
-| Everything else | **Redactedt** |
+| Everything else | **Redacted** |
 
 ---
 
