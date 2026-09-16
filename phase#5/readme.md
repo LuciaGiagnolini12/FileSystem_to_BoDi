@@ -9,7 +9,7 @@ Phase 5 applies privacy protection to the graph. It classifies every Record and 
 `step_1_privacy_protection.py` runs six sequential phases:
 
 1. **Entity retrieval** — loads all Records and RecordSets from the three structure graphs
-2. **Classification** — decides what to anonymise and what to protect (see logic below)
+2. **Classification** — decides what to anonymise and what to keep (see logic below)
 3. **Anonymisation** — rewrites labels, titles, and author metadata for sensitive entities
 4. **Consistency check — titles** — verifies that every Title entity linked to an Redacted Record/RecordSet has also been Redacted; fixes any gaps
 5. **Author check** — scans kept entities for author metadata fields that contain unauthorised names and anonymises them selectively
@@ -70,7 +70,7 @@ Two spreadsheets must be present in the working directory (missing files are tol
 | File | Content |
 |------|---------|
 | `blacklist.xlsx` | One URI per row (first column). Entities to anonymise. |
-| `whitelist.xlsx` | One URI per row (first column). Entities to force-protect even if they would otherwise be Redacted. |
+| `whitelist.xlsx` | One URI per row (first column). Entities to force-keep even if they would otherwise be Redacted. |
 
 URIs may be written bare (`http://...`) or wrapped in angle brackets (`<http://...>`).
 
