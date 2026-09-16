@@ -1,6 +1,6 @@
 # Born-Digital Archive Pipeline — Phase 5
 
-Phase 5 applies privacy protection to the graph. It classifies every Record and RecordSet as either *to be Redacted* or *to be protected*, then rewrites the relevant triples in place across all named graphs.
+Phase 5 applies privacy protection to the graph. It classifies every Record and RecordSet as either *to be Redacted* or *to be kept*, then rewrites the relevant triples in place across all named graphs.
 
 ---
 
@@ -12,8 +12,8 @@ Phase 5 applies privacy protection to the graph. It classifies every Record and 
 2. **Classification** — decides what to anonymise and what to protect (see logic below)
 3. **Anonymisation** — rewrites labels, titles, and author metadata for sensitive entities
 4. **Consistency check — titles** — verifies that every Title entity linked to an Redacted Record/RecordSet has also been Redacted; fixes any gaps
-5. **Author check** — scans protected entities for author metadata fields that contain unauthorised names and anonymises them selectively
-6. **Consistency check — protected metadata** — verifies that technical metadata fields in the `PROTECTED_TECH_METADATA_TYPES` list have not been accidentally Redacted
+5. **Author check** — scans kept entities for author metadata fields that contain unauthorised names and anonymises them selectively
+6. **Consistency check — kept metadata** — verifies that technical metadata fields in the `kept_TECH_METADATA_TYPES` list have not been accidentally Redacted
 
 A Blazegraph journal backup is created automatically before any writes unless `--skip-backup` is passed.
 
@@ -23,14 +23,12 @@ A Blazegraph journal backup is created automatically before any writes unless `-
 
 | Condition | Decision |
 |-----------|----------|
-| Entity is linked to an `lrmoo:F1_Work` | **Protected** |
-| Entity URI is in `whitelist.xlsx` | **Protected** |
+| Entity is linked to an `lrmoo:F1_Work` | **Kept** |
+| Entity URI is in `whitelist.xlsx` | **Kept** |
 | Entity URI is in `blacklist.xlsx` | **Redacted** |
 | Entity is a hierarchical child of a blacklisted entity (via `rico:isOrWasIncludedIn`) | **Redacted** |
-| Entity is both blacklisted and work-linked / whitelisted | **Protected** (takes precedence) |
-| Everything else | **Protected** |
-
-In other words the default is to protect: only explicit blacklist membership (or hierarchy descent from a blacklisted node) triggers anonymisation.
+| Entity is both blacklisted and work-linked / whitelisted | **Kept** (takes precedence) |
+| Everything else | **Redactedt** |
 
 ---
 
@@ -51,9 +49,9 @@ The following metadata types are Redacted, and only these:
 
 All other technical metadata (file size, MIME type, dates, filesystem attributes, etc.) is **never touched** regardless of the Record's privacy status.
 
-**For protected entities:**
+**For kept (non-redacted) entities:**
 - `bodi:redactedInformation` → `"no"`
-- Author metadata fields are checked independently: if the value is not in the `AUTHORIZED_AUTHORS` or `NEUTRAL_AUTHOR_PATTERNS` lists, it is Redacted even on a protected Record.
+- Author metadata fields are checked independently: if the value is not in the `AUTHORIZED_AUTHORS` or `NEUTRAL_AUTHOR_PATTERNS` lists, it is redacted even on a to-keep Record.
 
 ---
 
@@ -111,9 +109,9 @@ NEUTRAL_AUTHOR_PATTERNS = {
 }
 ```
 
-**Protected technical metadata types** — fields that must never be Redacted regardless of context:
+**kept technical metadata types** — fields that must never be Redacted regardless of context:
 ```python
-PROTECTED_TECH_METADATA_TYPES = {
+kept_TECH_METADATA_TYPES = {
     "FileSize", "MIMEType", "CreateDate", "st_mtime", ...
 }
 ```
@@ -144,7 +142,7 @@ The script modifies triples **in place** across the structure graphs, the `updat
 fast_title_anonymization.log    # full execution log
 ```
 
-The exit code is `0` if all consistency checks pass, `1` if any anomaly is detected (protected metadata Redacted, or works not correctly protected).
+The exit code is `0` if all consistency checks pass, `1` if any anomaly is detected (kept metadata Redacted, or works not correctly kept).
 
 ---
 
